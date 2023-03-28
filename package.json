@@ -1,0 +1,21 @@
+{
+  "name": "backendcalculadora",
+  "version": "0.0.1",
+  "description": "Api de una calculadora",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "calculadora",
+    "api"
+  ],
+  "author": "Leidy Quiñones",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
