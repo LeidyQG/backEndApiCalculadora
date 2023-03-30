@@ -6,18 +6,28 @@ const app= express();
 
 app.use(express.json());
 
+
+app.use(function(req,res, next){
+    res.header("Access-Control-Allow-Origin","*");//"*" todas las URL
+    res.header("Access-Control-Allow-Methods","POST"); //Métodos a aceptar
+    res.header("Access-Control-Allow-Headers","Content-Type");//Headers a aceptar
+    next();//SIEMPRE PONER
+});
+
+
 //Definir los entry point de la API
 //Definir la ruta (la url) en dónde va a responder nuestra API
 // http://localhost:3000 =====> http://localhost:3000/api/sumar
 
 
-app.get(
+app.post(
     '/api/sumar',
     //Se requieren dos objetos: uno representando la petición
     //un objeto representando la respuesta
     (req, res)=>{
-        console.log("Alguien está conectándose a la ruta sumar");        
-        res.json(req.body);
+        const {numero_1, numero_2}= req.body;
+        const resultado=parseFloat(numero_1)+parseFloat(numero_2);        
+        res.json(resultado);
     }
 );
 
@@ -25,7 +35,7 @@ app.post(
     '/api/restar',
     (req, res)=>{
         const {numero_1, numero_2}= req.body;
-        const resultado=numero_1-numero_2;        
+        const resultado=parseFloat(numero_1)-pareFloat(numero_2);        
         res.json(resultado);
     }
 );
@@ -39,7 +49,7 @@ app.post(
         
         try{
             const {numero_1, numero_2}= req.body;           
-            resultado=numero_1/numero_2;   
+            resultado=parseFloat(numero_1)/pareFloat(numero_2);   
 
         }catch(error){
             //Gestionar el error
@@ -54,8 +64,8 @@ app.post(
 
 //3. Crear un servicio para escuchar peticiones
 app.listen(
-    3001,
+    3000,
     ()=>{
-      console.log("Servidor ejecutándose en el puerto 3001 con éxito");
+      console.log("Servidor ejecutándose en el puerto 3000 con éxito");
     }
 );
